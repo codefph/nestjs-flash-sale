@@ -4,7 +4,7 @@ import { CreateSecKillOrder } from "./dto/create-order.dto.js";
 import { randomUUID } from "crypto";
 
 @Injectable()
-class SecKillService {
+export class SecKillService {
     constructor(private readonly prismaService:PrismaService){}
 
     async createOrder(dot: CreateSecKillOrder){
