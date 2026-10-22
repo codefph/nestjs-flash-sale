@@ -1,4 +1,4 @@
-import { BadRequestException, ConflictException, Injectable, NotFoundException } from "@nestjs/common";
+import { BadRequestException, ConflictException, Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service.js";
 import { CreateSecKillOrder } from "./dto/create-order.dto.js";
 import { randomUUID } from "crypto";
@@ -84,7 +84,7 @@ export class SecKillService {
             }
             // 其他异常（数据库错误等）统一包装
             console.error('秒杀下单异常:', error);
-            throw new BadRequestException('下单失败，请稍后重试');
+            throw new InternalServerErrorException('下单失败，请稍后重试');
         }
     }
     // get active activity list
