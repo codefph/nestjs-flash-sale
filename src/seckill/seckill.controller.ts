@@ -11,6 +11,7 @@ export class SecKillController {
     getProduct(){
         return this.secKillService.getActiveActivities()
     }
+    
     @Post('order')
     createOrder(@Body() dto:CreateSecKillOrder){
         return this.secKillService.createOrder(dto)

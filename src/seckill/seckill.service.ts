@@ -43,20 +43,11 @@ export class SecKillService {
                     SET stock = stock - 1
                     WHERE id = ${activityId} and stock > 0
                 `
-                // .updateMany({
-                //     where:{
-                //         id: BigInt(activityId),
-                //         stock: {gt:0}
-                //     },
-                //     data: {
-                //         stock: {decrement : 1},
-                //     },
-                // })
                 if(!updateResult){
                     throw new BadRequestException('Sold out')
                 }
                 const orderNo = `ORD${Date.now()}${randomUUID().slice(0, 8).toUpperCase()}`;
-                const order = await this.prismaService.client.orders.create({
+                const order = await tx.orders.create({
                     data:{
                         order_no: orderNo,
                         user_id: userId,
